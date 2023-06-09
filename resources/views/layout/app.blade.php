@@ -97,8 +97,10 @@
     <footer class="footer bg-dark" style="margin-top: 351px">
         <div class="container d-flex justify-content-center align-items-center py-3">
             <span class="text-light">
-                &copy; {{ date('Y') }} Your Website Name. All rights reserved. | Created by Salah |
-                <a href="https://github.com/xSalah" target="_blank">GitHub</a>
+                &copy; {{ date('Y') }} Your Website Name. All rights reserved. | Created by xSalah |
+                <a href="https://github.com/xSalah" target="_blank"><i class="fa-brands fa-github text-secondary" style="font-size: 18px"></i></a>
+                <a href="https://www.instagram.com/xsalah03" target="_blank"><i class="fa-brands fa-instagram text-danger" style="font-size: 18px"></i></a>
+                <a href="https://www.facebook.com/xSalah.03" target="_blank"><i class="fa-brands fa-facebook text-primary" style="font-size: 18px"></i></a>
             </span>
         </div>
     </footer>
