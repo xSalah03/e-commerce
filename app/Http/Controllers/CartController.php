@@ -17,8 +17,13 @@ class CartController extends Controller
         $categoriesApp = Category::take(3)->get();
         $carts = Cart::all();
         $cartCount = Cart::count();
+        $total = 0;
+        foreach ($carts as $cart) {
+            $quantity = $cart->quantity;
+            $total += $cart->price * $quantity;
+        }
 
-        return view('pages.cart.index', compact('carts', 'categoriesApp', 'cartCount'));
+        return view('pages.cart.index', compact('carts', 'categoriesApp', 'cartCount', 'total'));
     }
 
     /**
@@ -65,7 +70,13 @@ class CartController extends Controller
         $carts = Cart::all();
         $cartCount = Cart::count();
         $matchedId = Cart::where('id', $id)->first();
-        return view('pages.cart.edit', compact('carts', 'categoriesApp', 'cartCount', 'matchedId'));
+        $total = 0;
+        foreach ($carts as $cart) {
+            $quantity = $cart->quantity;
+            $total += $cart->price * $quantity;
+        }
+
+        return view('pages.cart.edit', compact('carts', 'categoriesApp', 'cartCount', 'matchedId', 'total'));
     }
 
     /**
@@ -91,10 +102,22 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
+        $cart = Cart::find($id);
+
+        if ($cart) {
+            $cart->delete();
+            return redirect()->route('cart.index')->with('success', 'Cart deleted successfully.');
+        }
+
+        return redirect()->route('cart.index')->with('error', 'Failed to delete cart.');
+    }
+
+    public function remove(string $id)
+    {
         $cart = Cart::where('product_id', $id)->first();
         if ($cart) {
             $cart->delete();
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
+            return redirect()->back()->with('success', 'Product removed from cart successfully!');
         }
         return redirect()->back()->with('success', 'Product removed from cart successfully!');
     }

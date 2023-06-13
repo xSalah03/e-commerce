@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -13,14 +14,17 @@ class CategoryController extends Controller
     {
         $categoriesApp = Category::take(3)->get();
         $categories = Category::all();
-        return view('pages.category.index', compact('categories', 'categoriesApp'));
+        $cartCount = Cart::count();
+
+        return view('pages.category.index', compact('categories', 'categoriesApp', 'cartCount'));
     }
 
     public function create()
     {
         $categoriesApp = Category::take(3)->get();
+        $cartCount = Cart::count();
 
-        return view('pages.category.create', compact('categoriesApp'));
+        return view('pages.category.create', compact('categoriesApp', 'cartCount'));
     }
 
     public function store(Request $request)
@@ -45,14 +49,22 @@ class CategoryController extends Controller
         $categoriesApp = Category::where('id', '!=', $id)->take(3)->get();
         $category = Category::find($id);
         $products = Product::where('category_id', $id)->get();
-        return view('pages.category.show', compact('category', 'categoriesApp', 'products'));
+        $cartCount = Cart::count();
+        $productsWithSameCategory = Product::where('id', '!=', $id)
+            ->where('category_id', $id)
+            ->get();
+
+        return view('pages.category.show', compact('category', 'categoriesApp', 'products', 'cartCount', 'productsWithSameCategory'));
     }
 
     public function edit(string $id)
     {
+        $categories = Category::all();
         $category = Category::findOrFail($id);
+        $cartCount = Cart::count();
+        $categoriesApp = Category::where('id', '!=', $id)->take(3)->get();
 
-        return view('pages.category.edit', compact('category'));
+        return view('pages.category.edit', compact('category', 'cartCount', 'categories', 'categoriesApp'));
     }
 
     public function update(Request $request, string $id)
@@ -63,8 +75,7 @@ class CategoryController extends Controller
         ]);
 
         $category = Category::findOrFail($id);
-        $category->title = $validatedData['title'];
-        $category->description = $validatedData['description'];
+        $category->name = $validatedData['name'];
 
         if ($request->hasFile('cover')) {
             // Delete previous cover image if it exists

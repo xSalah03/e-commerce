@@ -26,7 +26,7 @@
                                                 </div>
                                                 <div class='card-body'>
                                                     <h5 class='card-title'>{{ Str::limit($category->name, 10) }} </h5>
-                                                    <a href='{{ route('details', $category->id) }}'
+                                                    <a href='{{ route('category.show', $category->id) }}'
                                                         class='btn btn-primary'>Show</a>
                                                     <a href='{{ route('category.edit', $category->id) }}'
                                                         class='btn btn-success'>Update</a>

@@ -15,6 +15,7 @@ class ProductController extends Controller
         $categoriesApp = Category::take(3)->get();
         $products = Product::all();
         $cartCount = Cart::count();
+
         return view('pages.product.index', compact('products', 'categoriesApp', 'cartCount'));
     }
 
@@ -24,8 +25,10 @@ class ProductController extends Controller
     public function create()
     {
         $categoriesApp = Category::take(3)->get();
+        $cartCount = Cart::count();
         $categories = Category::all();
-        return view('pages.product.create', compact('categories', 'categoriesApp'));
+
+        return view('pages.product.create', compact('categories', 'categoriesApp', 'cartCount'));
     }
 
     /**

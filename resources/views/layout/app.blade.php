@@ -58,6 +58,10 @@
                         @endforeach
                     </ul>
                     <li>
+                        <a class="nav-link{{ Request::is('contact*') ? ' active' : '' }}"
+                            href="{{ route('contact.index') }}">Contact</a>
+                    </li>
+                    <li>
                         <a class="nav-link{{ Request::is('cart*') ? ' active' : '' }}" href="{{ route('cart.index') }}">
                             <i class="fa-solid fa-cart-shopping"></i>
                             <span style="position: relative; right: 8px; bottom:10px; font-size: 12px"
@@ -98,9 +102,12 @@
         <div class="container d-flex justify-content-center align-items-center py-3">
             <span class="text-light">
                 &copy; {{ date('Y') }} Your Website Name. All rights reserved. | Created by xSalah |
-                <a href="https://github.com/xSalah" target="_blank"><i class="fa-brands fa-github text-secondary" style="font-size: 18px"></i></a>
-                <a href="https://www.instagram.com/xsalah03" target="_blank"><i class="fa-brands fa-instagram text-danger" style="font-size: 18px"></i></a>
-                <a href="https://www.facebook.com/xSalah.03" target="_blank"><i class="fa-brands fa-facebook text-primary" style="font-size: 18px"></i></a>
+                <a href="https://github.com/xSalah03" target="_blank"><i class="fa-brands fa-github text-secondary"
+                        style="font-size: 18px"></i></a>
+                <a href="https://www.instagram.com/xsalah03" target="_blank"><i
+                        class="fa-brands fa-instagram text-danger" style="font-size: 18px"></i></a>
+                <a href="https://www.facebook.com/xSalah.03" target="_blank"><i
+                        class="fa-brands fa-facebook text-primary" style="font-size: 18px"></i></a>
             </span>
         </div>
     </footer>

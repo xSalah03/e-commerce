@@ -30,4 +30,9 @@ class Controller extends BaseController
         $productsHome = Product::take(9)->get();
         return view('index', compact('productsHome', 'categoriesApp', 'cart', 'cartCount'));
     }
+
+    public function goBack()
+    {
+        return redirect('/cart');
+    }
 }

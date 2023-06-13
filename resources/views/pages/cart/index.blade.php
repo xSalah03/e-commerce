@@ -11,7 +11,6 @@
                 <div class='card rounded-0 shadow'>
                     <div class='card-header d-flex justify-content-between align-items-center'>
                         <h5>List carts</h5>
-                        <a href='{{ route('cart.create') }}' class='btn btn-success'>Create new cart</a>
                     </div>
                     <table class="table table-striped">
                         <thead>
@@ -40,7 +39,6 @@
                                                 data-bs-target="#confirmDeleteModal{{ $cart->id }}">
                                                 Delete
                                             </button>
-
                                             <!-- Confirm Delete Modal -->
                                             <div class="modal fade" id="confirmDeleteModal{{ $cart->id }}"
                                                 tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ $cart->id }}"
@@ -71,6 +69,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <h4 class="p-3">total: {{ $total }}</h4>
                 </div>
             </div>
         </div>
